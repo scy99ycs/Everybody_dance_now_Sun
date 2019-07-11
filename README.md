@@ -23,10 +23,15 @@ Script have some train(temporary-smooth) option.
 
 When train start. Checkpoints file will be creat to record train process and save model.
 
-Normalization from source pose to target pose is coding now.
 
 Test process:
+
+Normalization from source pose to target pose is coding now.
 
 Pre-train model can be download here. and this is the video.
 
 Test option also in Script. Result will be save in datasets and creat video in result.
+
+Notice:
+
+Source and target video should have the same fps(50,60,120fps) and with a clean bright background,single person, Fixed lens
