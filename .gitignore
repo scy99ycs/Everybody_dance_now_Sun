@@ -1,0 +1,7 @@
+models/face/pose_iter_116000.caffemodel
+models/hand/pose_iter_102000.caffemodel
+models/pose/body_25/pose_iter_584000.caffemodel
+datasets/
+result/
+checkpoints/
+__pycache__/

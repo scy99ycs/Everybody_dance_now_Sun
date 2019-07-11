@@ -1,0 +1,1 @@
+python test_video.py --name everybody_dance_now_second --model pose2vid --dataroot ./datasets/ --which_epoch latest --netG local --ngf 32 --label_nc 0 --no_instance --resize_or_crop scale_width --loadSize 512

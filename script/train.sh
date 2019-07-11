@@ -1,0 +1,1 @@
+python train.py --name everybody_dance_now --model pose2vid --dataroot ./datasets/ --continue_train --netG local --ngf 32 --num_D 3 --tf_log --niter_fix_global 10 --label_nc 0 --no_instance --save_epoch_freq 10 --lr=0.0001 --resize_or_crop none
