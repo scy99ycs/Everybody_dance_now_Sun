@@ -41,7 +41,7 @@ class Pose2VidHDModel(BaseModel):
         if self.use_features:
             netG_input_nc += opt.feat_num
 
-        # TODO: 20180929: Generator Input contains two images...
+        # TODO:  Generator Input contains two images...
         netG_input_nc += opt.output_nc  # also contains the previous frame
         self.netG = networks.define_G(netG_input_nc, opt.output_nc, opt.ngf, opt.netG, 
                                       opt.n_downsample_global, opt.n_blocks_global, opt.n_local_enhancers, 
@@ -54,7 +54,7 @@ class Pose2VidHDModel(BaseModel):
             if not opt.no_instance:
                 netD_input_nc += 1
 
-            # TODO: 20180929: Generator Input contains two images...
+            # TODO:  Generator Input contains two images...
             netD_input_nc *= 2  # two pairs of pose/frame
             self.netD = networks.define_D(netD_input_nc, opt.ndf, opt.n_layers_D, opt.norm, use_sigmoid, 
                                           opt.num_D, not opt.no_ganFeat_loss, gpu_ids=self.gpu_ids)
@@ -157,7 +157,7 @@ class Pose2VidHDModel(BaseModel):
 
         return input_label, inst_map, real_image, feat_map
 
-    # TODO: 20180930: Ignore features for now.
+    # TODO:  Ignore features for now.
     def forward(self, label, real_image):
 
         label = label.data.cuda()
@@ -201,19 +201,19 @@ class Pose2VidHDModel(BaseModel):
             loss_G_VGG = (self.criterionVGG(y1, gt1) + self.criterionVGG(y2, gt2))\
                          * self.opt.lambda_feat
 
-        # 20181012: pwc-flow matching loss
+        #  pwc-flow matching loss
         loss_G_flow = 0
         if not self.opt.no_flow_loss:
             loss_G_flow = self.criterionFlow(gt1.detach(), gt2.detach(), y1, y2) * self.opt.lambda_flow / self.nelem
 
-        # 20180930: Always return fake_B now, let super function decide whether to save it
+        #  Always return fake_B now, let super function decide whether to save it
         y1_clean = torch.squeeze(y1.detach())
         y2_clean = torch.squeeze(y2.detach())
         return [self.loss_filter(loss_G_GAN, loss_G_GAN_Feat, loss_G_VGG, loss_G_flow, loss_D_real, loss_D_fake),
                 torch.cat((y1_clean, y2_clean), dim=2)]
 
     # TODO: Implement a full training cycle in here, necessary for some carefully maneuver
-    # 20180930: This is a tricky one, be careful!
+    #  This is a tricky one, be careful!
     def train_one_step(self, data, save_fake=False):
         losses, generated = self.forward(Variable(data['label']), Variable(data['image']))
 
